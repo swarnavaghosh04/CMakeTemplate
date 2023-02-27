@@ -11,6 +11,6 @@ std::ofstream debug_file(DEBUG_FILE);
 #include "CMakeTemplate/CMakeTemplate.hpp"
 
 void say_hello(){
-    std::cout << "Hello, from CMake-Template!" << std::endl;
-    DEBUG_STREAM("Hello, from CMake-Template!" << std::endl);
+    std::cout << "Hello, from CMakeTemplate!" << std::endl;
+    DEBUG_STREAM("Hello, from CMakeTemplate!" << std::endl);
 }
