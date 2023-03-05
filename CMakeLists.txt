@@ -18,6 +18,7 @@ set(CPACK_PACKAGE_CONTACT "Swarnava Ghosh <swarnavaghosh04@gmail.com>")
 set(CPACK_PACKAGE_VENDOR "Swarnava Ghosh")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "gcc,cmake")
 set(CPACK_RPM_PACKAGE_REQUIRES "gcc,cmake")
+set(CPACK_RPM_PACKAGE_LICENSE "MIT")
 
 add_subdirectory(src)
 add_subdirectory(tests)
