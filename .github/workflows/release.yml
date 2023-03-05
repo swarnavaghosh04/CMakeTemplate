@@ -63,7 +63,7 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: build/*.rpm
     - name: Upload Release Asset - ArchLinux
-      id: upload-release-asset-rpm
+      id: upload-release-asset-archlinux
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
