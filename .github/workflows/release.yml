@@ -34,7 +34,8 @@ jobs:
     - name: Create ArchLinux Package
       id: makepkg
       uses: edlanglois/pkgbuild-action@v1
-      pkgdir: build
+      with:
+        pkgdir: build
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
