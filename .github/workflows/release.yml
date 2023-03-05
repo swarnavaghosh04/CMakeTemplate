@@ -13,27 +13,28 @@ jobs:
     # You can convert this to a matrix build if you need cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
     runs-on: ubuntu-latest
-    container:
-      image: archlinux:latest
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
     - name: Download Dependencies
       run: |
-        echo 'y' | pacman -Syyuu
-        echo 'y' | pacman -S base-devel cmake rpm-tools
+        sudo apt update
+        sudo apt install cmake rpm
     - name: Build
       run: |
         mkdir build && cd build
         cmake .. -DCMAKE_BUILD_TYPE=Release
         cmake --build .
-    - name: Create Packages
+    - name: Create DEB and RPM Packages
       working-directory: ${{github.workspace}}/build
       run: |
         cpack -G DEB
         cpack -G RPM
         cpack -G TGZ
-        makepkg
+    - name: Create ArchLinux Package
+      id: makepkg
+      uses: edlanglois/pkgbuild-action@v1
+      pkgdir: build
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -71,4 +72,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: build/*.pkg.tar.zst
+        asset_path: ${{ steps.makepkg.outputs.pkgfile0 }}"
